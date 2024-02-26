@@ -17,4 +17,35 @@ import streamlit as st
 st.set_page_config(page_title="Actividad diaria", page_icon="📊")
 st.markdown("# Actividad diaria")
 st.sidebar.header("Actividad diaria")
-st.write("Texto")
+
+import streamlit as st
+
+# Inicializar el contador
+contador = st.session_state.get('contador', 0)
+
+# Crear una fila para mostrar los botones
+st.write("Nuevo prospecto")
+col1, col2 = st.columns([1, 1])
+
+# En la primera columna, mostrar el botón "más"
+with col1:
+    if st.button('más'):
+        if contador <= 25:  # Verificar que el contador no exceda el máximo de 25 puntos
+            contador += 1
+            st.session_state['contador'] = contador
+
+# En la segunda columna, mostrar el botón "menos"
+with col2:
+    if st.button('menos'):
+        if contador > 0:  # Verificar que el contador no sea menor a 0 puntos
+            contador -= 1
+            st.session_state['contador'] = contador
+
+
+# Mostrar el contador actual
+st.write(f'Contador actual: {contador} puntos')
+
+# Crear un botón que reinicie el contador
+if st.button('Reiniciar contador'):
+    contador = 0
+    st.session_state['contador'] = contador
